@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "dict-game",
+    "slug": "dict-game",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "dict-game"
+}
