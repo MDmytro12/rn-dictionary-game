@@ -7,7 +7,10 @@
     "start": "react-native start"
   },
   "dependencies": {
+    "@expo/vector-icons": "^12.0.5",
+    "@react-native-community/async-storage": "^1.12.1",
     "@react-navigation/native": "^6.0.2",
+    "@react-navigation/native-stack": "^6.1.0",
     "expo": "~42.0.1",
     "expo-splash-screen": "~0.11.2",
     "expo-status-bar": "~1.0.4",
@@ -16,6 +19,7 @@
     "react-dom": "16.13.1",
     "react-native": "~0.63.4",
     "react-native-gesture-handler": "~1.10.2",
+    "react-native-local-mongodb": "^2.2.9",
     "react-native-reanimated": "~2.2.0",
     "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "~3.4.0",
