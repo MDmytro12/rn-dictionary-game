@@ -1,9 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { MenuScreen , ProfileScreen } from './screens';
+import { MenuScreen , ProfileScreen  , LearningChooseLvlScreen} from './screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +35,25 @@ const App = () => {
           options={
             {
               title: 'My profile' ,
+              headerTintColor: "#fff" ,
+              headerTitleStyle: {
+                fontSize: 27,
+                fontWeight: 'bold' 
+              } , 
+              headerStyle: { 
+                backgroundColor: 'black'
+              } ,
+              headerTitleAlign: 'center' ,
+              headerShadowVisible: false
+            }
+          }
+        />
+        <Stack.Screen 
+          name="Learning" 
+          component={LearningChooseLvlScreen}  
+          options={
+            {
+              title: 'Learning' ,
               headerTintColor: "#fff" ,
               headerTitleStyle: {
                 fontSize: 27,
