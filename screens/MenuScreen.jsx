@@ -46,7 +46,10 @@ const Menu = ({navigation}) => {
                 <ButtonContainerWrapper>
                     <ButtonsContainer>
                         <View style={{overflow: 'hidden' , borderRadius:25 , width: '100%'}}>
-                            <ButtonTouchable onPressOut={() => setButtonStyle({...buttonStyle , "1" : false})} onPressIn={() => setButtonStyle({...buttonStyle , "1" : true})} style={buttonStyle['1'] ? styles.activePress : styles.casualPress}>
+                            <ButtonTouchable onPressOut={() => {
+                                setButtonStyle({...buttonStyle , "1" : false})
+                                navigation.navigate('Profile')
+                            }} onPressIn={() => setButtonStyle({...buttonStyle , "1" : true})} style={buttonStyle['1'] ? styles.activePress : styles.casualPress}>
                                 <ButtonName style={{letterSpacing: 4}} style={buttonStyle["1"] ? styles.activeText : styles.casualText}>My profile</ButtonName>
                             </ButtonTouchable>
                             <ButtonTouchable onPressOut={() => setButtonStyle({...buttonStyle , "2" : false})} onPressIn={() => setButtonStyle({...buttonStyle , "2" : true})} style={buttonStyle['2'] ? styles.activePress : styles.casualPress}>

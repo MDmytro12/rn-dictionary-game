@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { SimpleLineIcons } from '@expo/vector-icons';
 
-const MenuButton = ({onPress}) => {
+const MenuButton = ({onPress , color}) => {
 
     return(
         <MenuButtonTouchable onPress={onPress} >
-            <SimpleLineIcons name="menu" size={26} color="black" />
+            <SimpleLineIcons name="menu" size={26} color={color ? color : 'black'} />
         </MenuButtonTouchable>
     )
 }

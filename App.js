@@ -3,14 +3,14 @@ import styled from 'styled-components';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { MenuScreen } from './screens';
+import { MenuScreen , ProfileScreen } from './screens';
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   return(
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Menu"> 
+      <Stack.Navigator initialRouteName="Menu" > 
         <Stack.Screen 
           name="Menu" 
           component={MenuScreen}  
@@ -19,11 +19,30 @@ const App = () => {
               title: 'Menu' ,
               headerTintColor: "#fff" ,
               headerTitleStyle: {
-                fontSize: 27,
+                fontSize: 27, 
                 fontWeight: 'bold' 
               } , 
               headerStyle: { 
                 backgroundColor: '#D18EF5'
+              } ,
+              headerTitleAlign: 'center' ,
+              headerShadowVisible: false
+            } 
+          }
+        />
+        <Stack.Screen 
+          name="Profile" 
+          component={ProfileScreen}  
+          options={
+            {
+              title: 'My profile' ,
+              headerTintColor: "#fff" ,
+              headerTitleStyle: {
+                fontSize: 27,
+                fontWeight: 'bold' 
+              } , 
+              headerStyle: { 
+                backgroundColor: 'black'
               } ,
               headerTitleAlign: 'center' ,
               headerShadowVisible: false
