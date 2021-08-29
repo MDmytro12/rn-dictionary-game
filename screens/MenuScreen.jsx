@@ -1,8 +1,9 @@
-import React, { useLayoutEffect } from 'react' 
+import React, { useLayoutEffect, useState } from 'react' 
 import styled from 'styled-components'
 import { MenuButton } from '../components'
 import dogImage from '../assets/images/menu-dog.png'
 import { AntDesign , FontAwesome5 , FontAwesome , Feather } from '@expo/vector-icons';
+import {View} from 'react-native';  
 
 const Menu = ({navigation}) => {
 
@@ -14,32 +15,59 @@ const Menu = ({navigation}) => {
         })
     } , [navigation])
 
+    const [buttonStyle , setButtonStyle] = useState({
+        "1" : false ,
+        "2" : false ,
+        "3" : false , 
+        "4" : false ,
+        "5" : false ,
+        "6" : false ,
+        "7" : false
+    })
+
+    const styles = {
+        activePress : {
+            backgroundColor: 'black'
+        } ,
+        activeText : {
+            color: 'white'
+        } , 
+        casualPress : {
+            backgroundColor: 'white' 
+        } ,
+        casualText : {
+            color: 'black'
+        }
+    }
+
     return(
         <>
             <MenuContainer>
                 <ButtonContainerWrapper>
                     <ButtonsContainer>
-                        <ButtonTouchable>
-                            <ButtonName style={{letterSpacing: 4}}>My profile</ButtonName>
-                        </ButtonTouchable>
-                        <ButtonTouchable>
-                            <ButtonName style={{letterSpacing: 4}}>Learning</ButtonName>
-                        </ButtonTouchable>
-                        <ButtonTouchable>
-                            <ButtonName style={{letterSpacing: 4}}>Settings</ButtonName>
-                        </ButtonTouchable>
-                        <ButtonTouchable>
-                            <ButtonName style={{letterSpacing: 4}}>About App</ButtonName>
-                        </ButtonTouchable>
-                        <ButtonTouchable>
-                            <ButtonName style={{letterSpacing: 4}}>Contact us</ButtonName>
-                        </ButtonTouchable>
-                        <ButtonTouchable>
-                            <ButtonName style={{letterSpacing: 4}}>Vocabulary</ButtonName>
-                        </ButtonTouchable>
-                        <ButtonTouchable style={{borderBottomWidth: 0}}>
-                            <ButtonName style={{letterSpacing: 4}}>Help </ButtonName>
-                        </ButtonTouchable>
+                        <View style={{overflow: 'hidden' , borderRadius:25 , width: '100%'}}>
+                            <ButtonTouchable onPressOut={() => setButtonStyle({...buttonStyle , "1" : false})} onPressIn={() => setButtonStyle({...buttonStyle , "1" : true})} style={buttonStyle['1'] ? styles.activePress : styles.casualPress}>
+                                <ButtonName style={{letterSpacing: 4}} style={buttonStyle["1"] ? styles.activeText : styles.casualText}>My profile</ButtonName>
+                            </ButtonTouchable>
+                            <ButtonTouchable onPressOut={() => setButtonStyle({...buttonStyle , "2" : false})} onPressIn={() => setButtonStyle({...buttonStyle , "2" : true})} style={buttonStyle['2'] ? styles.activePress : styles.casualPress}>
+                                <ButtonName style={{letterSpacing: 4}} style={buttonStyle["2"] ? styles.activeText : styles.casualText}>Learning</ButtonName>
+                            </ButtonTouchable>
+                            <ButtonTouchable onPressOut={() => setButtonStyle({...buttonStyle , "3" : false})} onPressIn={() => setButtonStyle({...buttonStyle , "3" : true})} style={buttonStyle['3'] ? styles.activePress : styles.casualPress}>
+                                <ButtonName style={{letterSpacing: 4}} style={buttonStyle["3"] ? styles.activeText : styles.casualText}>Settings</ButtonName>
+                            </ButtonTouchable>
+                            <ButtonTouchable onPressOut={() => setButtonStyle({...buttonStyle , "4" : false})} onPressIn={() => setButtonStyle({...buttonStyle , "4" : true})} style={buttonStyle['4'] ? styles.activePress : styles.casualPress}>
+                                <ButtonName style={{letterSpacing: 4}} style={buttonStyle["4"] ? styles.activeText : styles.casualText}>About App</ButtonName>
+                            </ButtonTouchable>
+                            <ButtonTouchable onPressOut={() => setButtonStyle({...buttonStyle , "5" : false})} onPressIn={() => setButtonStyle({...buttonStyle , "5" : true})} style={buttonStyle['5'] ? styles.activePress : styles.casualPress}>
+                                <ButtonName style={{letterSpacing: 4}} style={buttonStyle["5"] ? styles.activeText : styles.casualText}>Contact us</ButtonName>
+                            </ButtonTouchable>
+                            <ButtonTouchable onPressOut={() => setButtonStyle({...buttonStyle , "6" : false})} onPressIn={() => setButtonStyle({...buttonStyle , "6" : true})} style={buttonStyle['6'] ? styles.activePress : styles.casualPress}>
+                                <ButtonName style={{letterSpacing: 4}} style={buttonStyle["6"] ? styles.activeText : styles.casualText}>Vocabulary</ButtonName>
+                            </ButtonTouchable>
+                            <ButtonTouchable onPressOut={() => setButtonStyle({...buttonStyle , "7" : false})} onPressIn={() => setButtonStyle({...buttonStyle , "7" : true})} style={buttonStyle['7'] ? {...styles.activePress , borderBottomWidth: 0} : {...styles.casualPress , borderBottomWidth: 0}} >
+                                <ButtonName style={{letterSpacing: 4}} style={buttonStyle["7"] ? styles.activeText : styles.casualText}>Help</ButtonName>
+                            </ButtonTouchable>
+                        </View>
                     </ButtonsContainer>
                 </ButtonContainerWrapper>
                 
@@ -88,7 +116,7 @@ const FooterButtonName = styled.Text`
     color: white;
 `;
 
-const FooterButtonTouch = styled.TouchableWithoutFeedback`
+const FooterButtonTouch = styled.TouchableOpacity`
     border-width: 2px ;
     border-color: white;
     border-radius: 30px;
@@ -113,15 +141,15 @@ const ButtonName = styled.Text`
     font-weight: 700;
 `;
 
-const ButtonTouchable = styled.TouchableOpacity`
+const ButtonTouchable = styled.Pressable`
     display: flex ;
     justify-content: center;
     align-items: center;
     border-bottom-width: black;
     border-bottom-width: 2px;
-
     padding-top: 10px;
     padding-bottom: 10px;
+    background-color: red;
 `;
 
 const ButtonContainerWrapper = styled.View`
