@@ -6,6 +6,10 @@ import android.net.Uri;
 
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.imagepicker.ImagePickerPackage;
+import com.imagepicker.ImagePickerPackage;
+import com.imagepicker.ImagePickerPackage;
+import com.reactnativedocumentpicker.DocumentPickerPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -23,6 +27,8 @@ import expo.modules.updates.UpdatesController;
 import com.facebook.react.bridge.JSIModulePackage;
 import com.swmansion.reanimated.ReanimatedJSIModulePackage;
 
+import com.filepicker.FilePickerPackage;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
@@ -38,6 +44,7 @@ public class MainApplication extends Application implements ReactApplication {
     public boolean getUseDeveloperSupport() {
       return BuildConfig.DEBUG;
     }
+
 
     @Override
     protected List<ReactPackage> getPackages() {
