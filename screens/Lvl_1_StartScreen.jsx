@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import startImage from '../assets/images/lvl_start.png';
 import arrowImage from '../assets/images/arrow.png';
 
-const Lvl_1_StartScreen = ({ navigation }) => {
+const Lvl_1_StartScreen = ({ navigation, route }) => {
+	console.log(route.params);
 	return (
 		<>
 			<InfoContainer>

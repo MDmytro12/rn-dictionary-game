@@ -6,6 +6,7 @@ import { MenuButton } from '../components';
 import db from '../db/database';
 import Lvl_1_StartScreen from './Lvl_1_StartScreen';
 import Lvl_1_TemplateScreen from './Lvl_1_TemplateScreen';
+import Lvl_1_FinishScreen from './Lvl_1_FinishScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,7 +23,7 @@ const LearningChooseLvlScreen = ({ navigation }) => {
 	}, [navigation]);
 
 	return (
-		<Stack.Navigator initialRouteName="L_1_Start">
+		<Stack.Navigator initialRouteName="LChoose">
 			<Stack.Screen
 				name="LChoose"
 				component={LChooseScreen}
@@ -40,6 +41,13 @@ const LearningChooseLvlScreen = ({ navigation }) => {
 			<Stack.Screen
 				name="L_1_Template"
 				component={Lvl_1_TemplateScreen}
+				options={{
+					headerShown: false,
+				}}
+			/>
+			<Stack.Screen
+				name="L_1_Finish"
+				component={Lvl_1_FinishScreen}
 				options={{
 					headerShown: false,
 				}}
@@ -65,6 +73,10 @@ const LChooseScreen = ({ navigation }) => {
 					<LvlButton
 						onPressIn={() => {
 							setButtonStyle({ ...buttonStyle, 1: true });
+							db.find({ path: 'lvl_1' }, (err, newDocs) => {
+								console.log(newDocs);
+								navigation.navigate('L_1_Start', newDocs);
+							});
 						}}
 						onPressOut={() => {
 							setButtonStyle({ ...buttonStyle, 1: false });
