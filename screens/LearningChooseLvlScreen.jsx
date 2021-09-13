@@ -7,6 +7,8 @@ import db from '../db/database';
 import Lvl_1_StartScreen from './Lvl_1_StartScreen';
 import Lvl_1_TemplateScreen from './Lvl_1_TemplateScreen';
 import Lvl_1_FinishScreen from './Lvl_1_FinishScreen';
+import { useEffect } from 'react';
+import { ActivityIndicatorBase } from 'react-native';
 
 const Stack = createNativeStackNavigator();
 
@@ -66,6 +68,16 @@ const LChooseScreen = ({ navigation }) => {
 		6: false,
 	});
 
+	const [level_1_Info, setLevel_1_Info] = useState(false);
+
+	useEffect(() => {
+		db.find({ path: 'lvl_1' }, async (e, d) => {
+			setLevel_1_Info(d);
+			console.log(level_1_Info);
+		});
+		console.log('Work!');
+	}, []);
+
 	return (
 		<>
 			<LCContainer>
@@ -73,8 +85,7 @@ const LChooseScreen = ({ navigation }) => {
 					<LvlButton
 						onPressIn={() => {
 							setButtonStyle({ ...buttonStyle, 1: true });
-							db.find({ path: 'lvl_1' }, (err, newDocs) => {
-								console.log(newDocs);
+							db.findAsync({ path: 'lvl_1' }, (err, newDocs) => {
 								navigation.navigate('L_1_Start', newDocs);
 							});
 						}}
@@ -89,22 +100,21 @@ const LChooseScreen = ({ navigation }) => {
 					>
 						<LvlButtonName>Level 1</LvlButtonName>
 					</LvlButton>
-					<LvlIndicatorContainer>
-						<LvlIndicator>
-							<LvlNumberContainer style={{ borderLeftWidth: 0 }}>
-								<LvlNumber>1</LvlNumber>
-							</LvlNumberContainer>
-							<LvlNumberContainer style={{ backgroundColor: 'white' }}>
-								<LvlNumber>2</LvlNumber>
-							</LvlNumberContainer>
-							<LvlNumberContainer style={{ backgroundColor: 'white' }}>
-								<LvlNumber>3</LvlNumber>
-							</LvlNumberContainer>
-							<LvlNumberContainer style={{ backgroundColor: 'white' }}>
-								<LvlNumber>4</LvlNumber>
-							</LvlNumberContainer>
-						</LvlIndicator>
-					</LvlIndicatorContainer>
+					{/* {!level_1_Info && <ActivityIndicatorBase />} */}
+					{/* {level_1_Info !== null && (
+						<LvlIndicatorContainer>
+							<LvlIndicator>
+								{level_1_Info.map((item, index) => (
+									<LvlNumberContainer
+										key={index}
+										style={{ borderLeftWidth: 0 }}
+									>
+										<LvlNumber>{index + 1}</LvlNumber>
+									</LvlNumberContainer>
+								))}
+							</LvlIndicator>
+						</LvlIndicatorContainer>
+					)} */}
 				</LvlRow>
 				<LvlRow>
 					<LvlButton

@@ -2,15 +2,19 @@ import React from 'react';
 import styled from 'styled-components';
 import { ButtonLearning, NextButton } from '../components';
 import dogImg from '../assets/images/dog_con.png';
+import db from '../db/database';
 
 const Lvl_1_FinishScreen = ({ navigation }) => {
 	return (
 		<ConContainer>
-			<ButtonLearning lvlNumber={1} />
+			<ButtonLearning
+				lvlNumber={1}
+				onPress={() => navigation.navigate('L_1_Start')}
+			/>
 			<ConTitle>Congratulations!</ConTitle>
 			<SubTitle>You have finished the 1st Level.</SubTitle>
 			<ConImage source={dogImg} />
-			<NextButton />
+			<NextButton onPress={() => navigation.navigate('LChoose')} />
 		</ConContainer>
 	);
 };

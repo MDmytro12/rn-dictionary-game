@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const NextButton = () => {
+const NextButton = ({ onPress }) => {
 	return (
 		<Button>
-			<ButtonName>Next level</ButtonName>
+			<ButtonName onPress={onPress}>Next level</ButtonName>
 		</Button>
 	);
 };

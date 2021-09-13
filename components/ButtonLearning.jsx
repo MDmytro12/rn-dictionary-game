@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ButtonLearning = ({ lvlNumber }) => {
+const ButtonLearning = ({ lvlNumber, onPress }) => {
 	return (
 		<>
 			<LevelTitle>Level 1</LevelTitle>
-			<ButtonLearn>
+			<ButtonLearn onPress={onPress}>
 				<ButtonName>Learning</ButtonName>
 			</ButtonLearn>
 		</>

@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 import startImage from '../assets/images/lvl_start.png';
 import arrowImage from '../assets/images/arrow.png';
+import db from '../db/database';
 
 const Lvl_1_StartScreen = ({ navigation, route }) => {
-	console.log(route.params);
 	return (
 		<>
 			<InfoContainer>
@@ -28,7 +28,11 @@ const Lvl_1_StartScreen = ({ navigation, route }) => {
 			</ArrowIamgeWrapper>
 
 			<ButtonWrapper>
-				<ButtonPress onPress={() => navigation.navigate('L_1_Template')}>
+				<ButtonPress
+					onPress={() => {
+						navigation.navigate('L_1_Template');
+					}}
+				>
 					<ButtonName>Start</ButtonName>
 				</ButtonPress>
 			</ButtonWrapper>
