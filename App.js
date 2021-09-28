@@ -70,10 +70,10 @@ const App = () => {
 					name="About"
 					component={AboutAppScreen}
 					options={{
-						title: 'Learning',
+						title: 'About Application',
 						headerTintColor: '#fff',
 						headerTitleStyle: {
-							fontSize: 27,
+							fontSize: 24,
 							fontWeight: 'bold',
 						},
 						headerStyle: {
