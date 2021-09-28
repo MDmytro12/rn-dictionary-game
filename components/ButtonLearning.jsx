@@ -1,12 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ButtonLearning = ({ lvlNumber, onPress }) => {
+const ButtonLearning = ({ disabled, style, lvlNumber, title, onPress }) => {
 	return (
 		<>
-			<LevelTitle>Level 1</LevelTitle>
-			<ButtonLearn onPress={onPress}>
-				<ButtonName>Learning</ButtonName>
+			<LevelTitle>Level {lvlNumber}</LevelTitle>
+			<ButtonLearn
+				disabled={disabled}
+				style={style === undefined ? {} : style}
+				onPress={onPress}
+			>
+				<ButtonName>{title}</ButtonName>
 			</ButtonLearn>
 		</>
 	);

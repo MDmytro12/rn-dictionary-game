@@ -1,0 +1,31 @@
+{
+	"lock": false,
+	"done": false,
+	"path": "lvl_3",
+	"task": [
+		{
+			"number": 1,
+			"done": false,
+			"question": "be after",
+			"correct": ["want, try to gain", "chase"]
+		},
+		{
+			"number": 2,
+			"done": false,
+			"question": "be against",
+			"correct": ["oppose"]
+		},
+		{
+			"number": 3,
+			"done": false,
+			"question": "be for",
+			"correct": ["share (a point of view), agree"]
+		},
+		{
+			"number": 4,
+			"done": false,
+			"question": "be for in",
+			"correct": ["expect smth (usually bad)"]
+		}
+	]
+}

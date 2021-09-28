@@ -30,6 +30,11 @@ const Lvl_1_StartScreen = ({ navigation, route }) => {
 			<ButtonWrapper>
 				<ButtonPress
 					onPress={() => {
+						db.find({ path: 'lvl_1' }, (e, d) => {
+							let tasks = d[0].task;
+							tasks = tasks.map((item) => ({ ...item, done: false }));
+							db.update({ path: 'lvl_1' }, { $set: { task: tasks } });
+						});
 						navigation.navigate('L_1_Template');
 					}}
 				>

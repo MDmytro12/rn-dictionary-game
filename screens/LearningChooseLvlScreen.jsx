@@ -7,8 +7,16 @@ import db from '../db/database';
 import Lvl_1_StartScreen from './Lvl_1_StartScreen';
 import Lvl_1_TemplateScreen from './Lvl_1_TemplateScreen';
 import Lvl_1_FinishScreen from './Lvl_1_FinishScreen';
-import { useEffect } from 'react';
-import { ActivityIndicatorBase } from 'react-native';
+import LChooseScreen from './LChooseScreen';
+
+import L_2_TemplateScreen from './L_2_TemplateScreen';
+import L_2_FinishScreen from './L_2_FinishScreen';
+
+import L_3_TemplateScreen from './L_3_TemplateScreen';
+import L_3_CorrectScreen from './L_3_CorrectScreen';
+import L_3_WrongScreen from './L_3_WrongScreen';
+import L_3_RightAnswerScreen from './L_3_RightAnswer';
+import L_3_FinishScreen from './L_3_FinishScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,8 +35,57 @@ const LearningChooseLvlScreen = ({ navigation }) => {
 	return (
 		<Stack.Navigator initialRouteName="LChoose">
 			<Stack.Screen
+				name="L_3_Template"
+				component={L_3_TemplateScreen}
+				options={{
+					headerShown: false,
+				}}
+			/>
+			<Stack.Screen
+				name="L_3_Finish"
+				component={L_3_FinishScreen}
+				options={{
+					headerShown: false,
+				}}
+			/>
+			<Stack.Screen
+				name="L_3_RA"
+				component={L_3_RightAnswerScreen}
+				options={{
+					headerShown: false,
+				}}
+			/>
+			<Stack.Screen
+				name="L_3_Wrong"
+				component={L_3_WrongScreen}
+				options={{
+					headerShown: false,
+				}}
+			/>
+			<Stack.Screen
+				name="L_3_Correct"
+				component={L_3_CorrectScreen}
+				options={{
+					headerShown: false,
+				}}
+			/>
+			<Stack.Screen
 				name="LChoose"
 				component={LChooseScreen}
+				options={{
+					headerShown: false,
+				}}
+			/>
+			<Stack.Screen
+				name="L_2_Finish"
+				component={L_2_FinishScreen}
+				options={{
+					headerShown: false,
+				}}
+			/>
+			<Stack.Screen
+				name="L_2_Template"
+				component={L_2_TemplateScreen}
 				options={{
 					headerShown: false,
 				}}
@@ -57,226 +114,5 @@ const LearningChooseLvlScreen = ({ navigation }) => {
 		</Stack.Navigator>
 	);
 };
-
-const LChooseScreen = ({ navigation }) => {
-	const [buttonStyle, setButtonStyle] = useState({
-		1: false,
-		2: false,
-		3: false,
-		4: false,
-		5: false,
-		6: false,
-	});
-
-	const [level_1_Info, setLevel_1_Info] = useState(false);
-
-	useEffect(() => {
-		db.find({ path: 'lvl_1' }, async (e, d) => {
-			setLevel_1_Info(d);
-			console.log(level_1_Info);
-		});
-		console.log('Work!');
-	}, []);
-
-	return (
-		<>
-			<LCContainer>
-				<LvlRow>
-					<LvlButton
-						onPressIn={() => {
-							setButtonStyle({ ...buttonStyle, 1: true });
-							db.findAsync({ path: 'lvl_1' }, (err, newDocs) => {
-								navigation.navigate('L_1_Start', newDocs);
-							});
-						}}
-						onPressOut={() => {
-							setButtonStyle({ ...buttonStyle, 1: false });
-						}}
-						style={
-							buttonStyle['1']
-								? { backgroundColor: 'white' }
-								: { backgroundColor: '#BBCAFE' }
-						}
-					>
-						<LvlButtonName>Level 1</LvlButtonName>
-					</LvlButton>
-					{/* {!level_1_Info && <ActivityIndicatorBase />} */}
-					{/* {level_1_Info !== null && (
-						<LvlIndicatorContainer>
-							<LvlIndicator>
-								{level_1_Info.map((item, index) => (
-									<LvlNumberContainer
-										key={index}
-										style={{ borderLeftWidth: 0 }}
-									>
-										<LvlNumber>{index + 1}</LvlNumber>
-									</LvlNumberContainer>
-								))}
-							</LvlIndicator>
-						</LvlIndicatorContainer>
-					)} */}
-				</LvlRow>
-				<LvlRow>
-					<LvlButton
-						onPressIn={() => {
-							setButtonStyle({ ...buttonStyle, 2: true });
-						}}
-						onPressOut={() => {
-							setButtonStyle({ ...buttonStyle, 2: false });
-						}}
-						style={
-							buttonStyle['2']
-								? { backgroundColor: 'white' }
-								: { backgroundColor: '#D8FFCB' }
-						}
-					>
-						<LvlButtonName>Level 2</LvlButtonName>
-					</LvlButton>
-					<LvlIndicatorContainer>
-						<MaterialIcons name="lock" size={24} color="black" />
-					</LvlIndicatorContainer>
-				</LvlRow>
-				<LvlRow>
-					<LvlButton
-						onPressIn={() => {
-							setButtonStyle({ ...buttonStyle, 3: true });
-						}}
-						onPressOut={() => {
-							setButtonStyle({ ...buttonStyle, 3: false });
-						}}
-						style={
-							buttonStyle['3']
-								? { backgroundColor: 'white' }
-								: { backgroundColor: '#FFFDCB' }
-						}
-					>
-						<LvlButtonName>Level 3</LvlButtonName>
-					</LvlButton>
-					<LvlIndicatorContainer>
-						<MaterialIcons name="lock" size={24} color="black" />
-					</LvlIndicatorContainer>
-				</LvlRow>
-				<LvlRow>
-					<LvlButton
-						onPressIn={() => {
-							setButtonStyle({ ...buttonStyle, 4: true });
-						}}
-						onPressOut={() => {
-							setButtonStyle({ ...buttonStyle, 4: false });
-						}}
-						style={
-							buttonStyle['4']
-								? { backgroundColor: 'white' }
-								: { backgroundColor: '#FEBBEB' }
-						}
-					>
-						<LvlButtonName>Level 4</LvlButtonName>
-					</LvlButton>
-					<LvlIndicatorContainer>
-						<MaterialIcons name="lock" size={24} color="black" />
-					</LvlIndicatorContainer>
-				</LvlRow>
-				<LvlRow>
-					<LvlButton
-						onPressIn={() => {
-							setButtonStyle({ ...buttonStyle, 5: true });
-						}}
-						onPressOut={() => {
-							setButtonStyle({ ...buttonStyle, 5: false });
-						}}
-						style={
-							buttonStyle['5']
-								? { backgroundColor: 'white' }
-								: { backgroundColor: '#E890FF' }
-						}
-					>
-						<LvlButtonName>Level 5</LvlButtonName>
-					</LvlButton>
-					<LvlIndicatorContainer>
-						<MaterialIcons name="lock" size={24} color="black" />
-					</LvlIndicatorContainer>
-				</LvlRow>
-				<LvlRow>
-					<LvlButton
-						onPressIn={() => {
-							setButtonStyle({ ...buttonStyle, 6: true });
-						}}
-						onPressOut={() => {
-							setButtonStyle({ ...buttonStyle, 6: false });
-						}}
-						style={
-							buttonStyle['6']
-								? { backgroundColor: 'white' }
-								: { backgroundColor: '#E6FFFF' }
-						}
-					>
-						<LvlButtonName>Level 6</LvlButtonName>
-					</LvlButton>
-					<LvlIndicatorContainer>
-						<MaterialIcons name="lock" size={24} color="black" />
-					</LvlIndicatorContainer>
-				</LvlRow>
-			</LCContainer>
-		</>
-	);
-};
-
-const LvlNumber = styled.Text`
-	font-weight: 700;
-	font-size: 16px;
-	width: 100%;
-	text-align: center;
-`;
-
-const LvlNumberContainer = styled.View`
-	background-color: #fff732;
-	width: 40px;
-	border-left-width: 2px;
-	border-left-color: black;
-`;
-
-const LvlIndicator = styled.View`
-	display: flex;
-	flex-direction: row;
-	height: 25px;
-	border: 2px solid black;
-`;
-
-const LvlIndicatorContainer = styled.View`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex: 1;
-`;
-
-const LvlButtonName = styled.Text`
-	font-weight: 600;
-	font-size: 22px;
-	width: 100%;
-	text-align: center;
-`;
-
-const LvlButton = styled.Pressable`
-	width: 120px;
-	border: 1px solid black;
-	border-radius: 30px;
-	padding: 7px 20px;
-`;
-
-const LvlRow = styled.View`
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	padding-left: 40px;
-`;
-
-const LCContainer = styled.View`
-	padding-top: 50px;
-	padding-bottom: 50px;
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-`;
 
 export default LearningChooseLvlScreen;

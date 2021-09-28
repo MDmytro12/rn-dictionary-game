@@ -3,34 +3,25 @@ import styled from 'styled-components';
 import { ButtonLearning, NextButton } from '../components';
 import dogImg from '../assets/images/dog_con.png';
 import db from '../db/database';
+import { useEffect } from 'react';
 
-const Lvl_1_FinishScreen = ({ navigation }) => {
+const L_3_FinishScreen = ({ navigation }) => {
 	return (
 		<ConContainer>
 			<ButtonLearning
-				lvlNumber={1}
-				title="Learning"
-				onPress={() => {
-					navigation.navigate({
-						name: 'L_1_Start',
-						params: {
-							update: true,
-						},
-						merge: true,
-					});
-				}}
+				lvlNumber={3}
+				title="Synonyms"
+				style={{ backgroundColor: 'rgba(255, 253, 203, 1)' }}
+				disabled={true}
 			/>
 			<ConTitle>Congratulations!</ConTitle>
-			<SubTitle>You have finished the 1st Level.</SubTitle>
+			<SubTitle>You have finished the 3-d Level.</SubTitle>
 			<ConImage source={dogImg} />
 			<NextButton
 				onPress={() => {
 					navigation.navigate({
 						name: 'LChoose',
-						params: {
-							update: true,
-						},
-						merge: true,
+						params: { update_3: true },
 					});
 				}}
 			/>
@@ -62,4 +53,4 @@ const ConContainer = styled.View`
 	background-color: white;
 `;
 
-export default Lvl_1_FinishScreen;
+export default L_3_FinishScreen;

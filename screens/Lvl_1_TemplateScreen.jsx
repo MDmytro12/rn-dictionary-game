@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Feather } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import { ButtonLearning } from '../components';
 import { useState } from 'react/cjs/react.development';
 import db from '../db/database';
@@ -18,17 +18,10 @@ const createMesive = (number = 1) => {
 };
 
 const Lvl_1_TemplateScreen = ({ navigation }) => {
-	const [currentInfo, setCurrrentInfo] = useState(null);
+	const [currentInfo, setCurrrentInfo] = useState(false);
 	const [currentPage, setCurrentPage] = useState(1);
 
 	useEffect(() => {
-		console.log('mount');
-		db.find({ path: 'lvl_1_page' }, (e, d) => {
-			if (e) {
-				return;
-			}
-			setCurrentPage(1);
-		});
 		db.find({ path: 'lvl_1' }, (err, newDoc) => {
 			if (err) {
 				return;
@@ -55,12 +48,12 @@ const Lvl_1_TemplateScreen = ({ navigation }) => {
 			<StarContainer>
 				{createMesive(currentPage).map((item, index) =>
 					index > 0 ? (
-						<Feather
+						<AntDesign
 							key={index}
 							name="star"
 							style={{ marginRight: 5 }}
 							size={24}
-							color="black"
+							color="rgba(146, 108, 255, 1)"
 						/>
 					) : (
 						<></>
@@ -70,6 +63,7 @@ const Lvl_1_TemplateScreen = ({ navigation }) => {
 			<LvlContainer>
 				<ButtonLearning
 					lvlNumber={1}
+					title="Learning"
 					onPress={() => {
 						if (currentPage < 4) {
 							db.update(
@@ -77,8 +71,33 @@ const Lvl_1_TemplateScreen = ({ navigation }) => {
 								{ $set: { currentPage: currentPage + 1 } },
 							);
 
+							db.find({ path: 'lvl_1' }, (e, d) => {
+								let tasks = d[0].task;
+								tasks = tasks.map((item) => {
+									if (item.number === currentPage) {
+										return { ...item, done: true };
+									}
+									return item;
+								});
+
+								db.update(
+									{ path: 'lvl_1' },
+									{ $set: { done: true, task: tasks } },
+								);
+							});
+
 							setCurrentPage(currentPage + 1);
 						} else {
+							db.find({ path: 'lvl_1' }, (e, d) => {
+								let tasks = d[0].task;
+								tasks = tasks.map((item) => {
+									if (item.number === currentPage) {
+										return { ...item, done: true };
+									}
+									return item;
+								});
+								db.update({ path: 'lvl_1' }, { $set: { task: tasks } });
+							});
 							navigation.navigate('L_1_Finish');
 						}
 					}}
@@ -89,8 +108,8 @@ const Lvl_1_TemplateScreen = ({ navigation }) => {
 						<EnglishWord>{currentInfo.word}</EnglishWord>
 						{currentInfo.synonyms.map((item, index) => (
 							<>
-								<SynonymWord>{item.title}</SynonymWord>
-								<ExampleText>{item.example}</ExampleText>
+								<SynonymWord key={item.title}>{item.title}</SynonymWord>
+								<ExampleText key={item.example}>{item.example}</ExampleText>
 							</>
 						))}
 					</>

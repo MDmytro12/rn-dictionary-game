@@ -4,33 +4,23 @@ import { ButtonLearning, NextButton } from '../components';
 import dogImg from '../assets/images/dog_con.png';
 import db from '../db/database';
 
-const Lvl_1_FinishScreen = ({ navigation }) => {
+const L_2_FinishScreen = ({ navigation }) => {
 	return (
 		<ConContainer>
 			<ButtonLearning
-				lvlNumber={1}
-				title="Learning"
-				onPress={() => {
-					navigation.navigate({
-						name: 'L_1_Start',
-						params: {
-							update: true,
-						},
-						merge: true,
-					});
-				}}
+				lvlNumber={2}
+				title="Synonyms"
+				style={{ backgroundColor: 'rgba(216, 255, 203, 1)' }}
+				disabled={true}
 			/>
 			<ConTitle>Congratulations!</ConTitle>
-			<SubTitle>You have finished the 1st Level.</SubTitle>
+			<SubTitle>You have finished the 2-nd Level.</SubTitle>
 			<ConImage source={dogImg} />
 			<NextButton
 				onPress={() => {
 					navigation.navigate({
 						name: 'LChoose',
-						params: {
-							update: true,
-						},
-						merge: true,
+						params: { update_2: true },
 					});
 				}}
 			/>
@@ -62,4 +52,4 @@ const ConContainer = styled.View`
 	background-color: white;
 `;
 
-export default Lvl_1_FinishScreen;
+export default L_2_FinishScreen;

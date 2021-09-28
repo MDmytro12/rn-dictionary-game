@@ -1,0 +1,55 @@
+{
+	"path": "lvl_2",
+	"done": false,
+	"lock": true,
+	"task": [
+		{
+			"number": 1,
+			"question": "be after",
+			"done": false,
+			"answers": [
+				"want, try to gain",
+				"oppose",
+				"share a point of view",
+				"chase"
+			],
+			"correct": [1, 4]
+		},
+		{
+			"number": 2,
+			"question": "be against",
+			"done": false,
+			"answers": [
+				"want, try to gain",
+				"oppose",
+				"share a point of view",
+				"chase"
+			],
+			"correct": [2]
+		},
+		{
+			"number": 3,
+			"question": "be for",
+			"done": false,
+			"answers": [
+				"want, try to gain",
+				"oppose",
+				"share a point of view",
+				"chase"
+			],
+			"correct": [3]
+		},
+		{
+			"number": 4,
+			"question": "be in for",
+			"done": false,
+			"answers": [
+				"want, try to gain",
+				"oppose",
+				"expect smth (usually bad)",
+				"chase"
+			],
+			"correct": [2]
+		}
+	]
+}

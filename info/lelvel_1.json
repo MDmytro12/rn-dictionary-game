@@ -1,0 +1,59 @@
+{
+	"_id": "TebIeSoFeg9sRl5y",
+	"done": true,
+	"path": "lvl_1",
+	"task": [
+		{
+			"done": false,
+			"lock": false,
+			"number": 1,
+			"synonyms": [
+				{
+					"example": "I think Chris is after my job.",
+					"title": "1. want , try to gain"
+				},
+				{
+					"example": "The police are after the robber.",
+					"title": "2. chase"
+				}
+			],
+			"word": "be after"
+		},
+		{
+			"done": false,
+			"lock": false,
+			"number": 2,
+			"synonyms": [
+				{
+					"example": "I was against the idea from the first.",
+					"title": "1. oppose"
+				}
+			],
+			"word": "be against"
+		},
+		{
+			"done": false,
+			"lock": false,
+			"number": 3,
+			"synonyms": [
+				{
+					"example": "Be careful, she is for feminism.",
+					"title": "1. share (a point of view), agree"
+				}
+			],
+			"word": "be for"
+		},
+		{
+			"done": false,
+			"lock": false,
+			"number": 4,
+			"synonyms": [
+				{
+					"example": "If their predictions are true, we`ll be in for a long winter.",
+					"title": "1. expect smth (usually bad)"
+				}
+			],
+			"word": "be for in"
+		}
+	]
+}
