@@ -7,6 +7,8 @@ import {
 	ProfileScreen,
 	LearningChooseLvlScreen,
 	AboutAppScreen,
+	VocabularySreen,
+	AddWordScreen,
 } from './screens';
 
 const Stack = createNativeStackNavigator();
@@ -71,6 +73,40 @@ const App = () => {
 					component={AboutAppScreen}
 					options={{
 						title: 'About Application',
+						headerTintColor: '#fff',
+						headerTitleStyle: {
+							fontSize: 24,
+							fontWeight: 'bold',
+						},
+						headerStyle: {
+							backgroundColor: 'black',
+						},
+						headerTitleAlign: 'center',
+						headerShadowVisible: false,
+					}}
+				/>
+				<Stack.Screen
+					name="Vocabulary"
+					component={VocabularySreen}
+					options={{
+						title: 'Vocabulary',
+						headerTintColor: '#fff',
+						headerTitleStyle: {
+							fontSize: 24,
+							fontWeight: 'bold',
+						},
+						headerStyle: {
+							backgroundColor: 'black',
+						},
+						headerTitleAlign: 'center',
+						headerShadowVisible: false,
+					}}
+				/>
+				<Stack.Screen
+					name="AddWord"
+					component={AddWordScreen}
+					options={{
+						title: 'Add new word',
 						headerTintColor: '#fff',
 						headerTitleStyle: {
 							fontSize: 24,

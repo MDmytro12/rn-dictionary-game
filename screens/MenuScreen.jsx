@@ -11,14 +11,6 @@ import {
 import { View } from 'react-native';
 
 const Menu = ({ navigation }) => {
-	useLayoutEffect(() => {
-		navigation.setOptions({
-			headerLeft: () => (
-				<MenuButton onPress={() => navigation.navigate('Menu')} />
-			),
-		});
-	}, [navigation]);
-
 	const [buttonStyle, setButtonStyle] = useState({
 		1: false,
 		2: false,
@@ -91,22 +83,6 @@ const Menu = ({ navigation }) => {
 								</ButtonName>
 							</ButtonTouchable>
 							<ButtonTouchable
-								onPressOut={() => setButtonStyle({ ...buttonStyle, 3: false })}
-								onPressIn={() => setButtonStyle({ ...buttonStyle, 3: true })}
-								style={
-									buttonStyle['3'] ? styles.activePress : styles.casualPress
-								}
-							>
-								<ButtonName
-									style={{ letterSpacing: 4 }}
-									style={
-										buttonStyle['3'] ? styles.activeText : styles.casualText
-									}
-								>
-									Settings
-								</ButtonName>
-							</ButtonTouchable>
-							<ButtonTouchable
 								onPressOut={() => {
 									setButtonStyle({ ...buttonStyle, 4: false });
 									navigation.navigate('About');
@@ -142,24 +118,14 @@ const Menu = ({ navigation }) => {
 								</ButtonName>
 							</ButtonTouchable>
 							<ButtonTouchable
-								onPressOut={() => setButtonStyle({ ...buttonStyle, 6: false })}
+								onPressOut={() => {
+									setButtonStyle({ ...buttonStyle, 6: false });
+									navigation.navigate('Vocabulary');
+								}}
 								onPressIn={() => setButtonStyle({ ...buttonStyle, 6: true })}
 								style={
 									buttonStyle['6'] ? styles.activePress : styles.casualPress
 								}
-							>
-								<ButtonName
-									style={{ letterSpacing: 4 }}
-									style={
-										buttonStyle['6'] ? styles.activeText : styles.casualText
-									}
-								>
-									Vocabulary
-								</ButtonName>
-							</ButtonTouchable>
-							<ButtonTouchable
-								onPressOut={() => setButtonStyle({ ...buttonStyle, 7: false })}
-								onPressIn={() => setButtonStyle({ ...buttonStyle, 7: true })}
 								style={
 									buttonStyle['7']
 										? { ...styles.activePress, borderBottomWidth: 0 }
@@ -169,10 +135,10 @@ const Menu = ({ navigation }) => {
 								<ButtonName
 									style={{ letterSpacing: 4 }}
 									style={
-										buttonStyle['7'] ? styles.activeText : styles.casualText
+										buttonStyle['6'] ? styles.activeText : styles.casualText
 									}
 								>
-									Help
+									Vocabulary
 								</ButtonName>
 							</ButtonTouchable>
 						</View>
