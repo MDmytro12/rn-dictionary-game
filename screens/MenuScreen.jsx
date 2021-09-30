@@ -113,6 +113,9 @@ const Menu = ({ navigation }) => {
 									style={
 										buttonStyle['5'] ? styles.activeText : styles.casualText
 									}
+									onPress={() => {
+										navigation.navigate('Contact');
+									}}
 								>
 									Contact us
 								</ButtonName>

@@ -2,10 +2,12 @@ import React, { useLayoutEffect, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { MenuButton } from '../components';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
-import { SectionList, Text } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
+import { SectionList } from 'react-native';
 import { WordItem } from '../components';
+import db from '../db/database';
 
-const VocabularyScreen = ({ navigation }) => {
+const VocabularyScreen = ({ navigation, route }) => {
 	useLayoutEffect(() => {
 		navigation.setOptions({
 			headerLeft: () => (
@@ -14,37 +16,77 @@ const VocabularyScreen = ({ navigation }) => {
 		});
 	}, [navigation]);
 
-	const DATA = [
+	const [allData, setAllData] = useState([
 		{
-			title: 'to drxddddddddddxxxxxxxxxxxxxxxxxxaw',
-			data: [
-				{
-					word: 'to draw',
-					translate: 'малювати',
-				},
-				{
-					word: 'to draw',
-					translate: 'малювати',
-				},
-				{
-					word: 'to draw',
-					translate: 'малювати',
-				},
-				{
-					word: 'to draw',
-					translate: 'малювати',
-				},
-				{
-					word: 'to draw',
-					translate: 'малювати',
-				},
-				{
-					word: 'to draw',
-					translate: 'малювати',
-				},
-			],
+			title: 'Start',
+			data: [],
 		},
-	];
+	]);
+
+	useEffect(() => {
+		db.find({ path: 'voc' }, (e, d) => {
+			if (d.length !== 0) {
+				setAllData([
+					{
+						title: 'Start',
+						data: d[0].data,
+					},
+				]);
+			} else {
+				setAllData([
+					{
+						title: 'Start',
+						data: [],
+					},
+				]);
+			}
+		});
+	}, []);
+
+	useEffect(() => {
+		if (route.params?.updateWord) {
+			db.find({ path: 'voc' }, (e, d) => {
+				setAllData([
+					{
+						title: 'Start',
+						data: [...d[0].data],
+					},
+				]);
+			});
+			route.params.updateWord = 0;
+		}
+	}, [route.params?.updateWord]);
+
+	const onChangeText = (text) => {
+		db.find({ path: 'voc' }, (e, d) => {
+			if (d.length !== 0) {
+				setAllData([
+					{
+						title: 'Start',
+						data: d[0].data,
+					},
+				]);
+				setAllData([
+					{
+						title: 'Start',
+						data: d[0].data.filter((item) =>
+							item.ew.toLowerCase().includes(text),
+						),
+					},
+				]);
+				console.log(allData);
+			}
+		});
+	};
+
+	const updateInfo = (data) => {
+		setAllData([
+			{
+				title: 'Start',
+				data,
+			},
+		]);
+	};
 
 	return (
 		<AboutContainer>
@@ -53,19 +95,49 @@ const VocabularyScreen = ({ navigation }) => {
 			</ButtonContainer>
 			<SearchContainer>
 				<FontAwesome name="search" size={24} color="white" />
-				<SearchInput />
+				<SearchInput maxLength={15} editable onChangeText={onChangeText} />
 			</SearchContainer>
 			<WordsContainer>
-				<SectionList
-					showsVerticalScrollIndicator={false}
-					sections={DATA}
-					keyExtractor={(item, index) => index}
-					renderItem={({ item }) => <WordItem item={item} />}
-				/>
+				{allData[0].data.length !== 0 && (
+					<SectionList
+						showsVerticalScrollIndicator={false}
+						sections={allData}
+						keyExtractor={(item, index) => index}
+						renderItem={({ item }) => (
+							<WordItem
+								navigation={navigation}
+								onStateChange={updateInfo}
+								item={item}
+							/>
+						)}
+					/>
+				)}
+				{allData[0].data.length === 0 && (
+					<EmptyContainer>
+						<AntDesign name="rest" size={50} color="white" />
+						<EmptyWords>Your vocabulary is empty!</EmptyWords>
+					</EmptyContainer>
+				)}
 			</WordsContainer>
 		</AboutContainer>
 	);
 };
+
+const EmptyContainer = styled.View`
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+
+const EmptyWords = styled.Text`
+	color: white;
+	font-size: 30px;
+	font-weight: 700;
+	margin-top: 20px;
+	text-align: center;
+`;
 
 const WordsContainer = styled.View`
 	height: 85%;

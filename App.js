@@ -9,6 +9,8 @@ import {
 	AboutAppScreen,
 	VocabularySreen,
 	AddWordScreen,
+	EditWordScreen,
+	ContactUsScreen,
 } from './screens';
 
 const Stack = createNativeStackNavigator();
@@ -24,7 +26,7 @@ const App = () => {
 						title: 'Menu',
 						headerTintColor: '#fff',
 						headerTitleStyle: {
-							fontSize: 27,
+							fontSize: 40,
 							fontWeight: 'bold',
 						},
 						headerStyle: {
@@ -35,10 +37,44 @@ const App = () => {
 					}}
 				/>
 				<Stack.Screen
+					name="Contact"
+					component={ContactUsScreen}
+					options={{
+						title: 'Contact us',
+						headerTintColor: '#fff',
+						headerTitleStyle: {
+							fontSize: 30,
+							fontWeight: 'bold',
+						},
+						headerStyle: {
+							backgroundColor: 'black',
+						},
+						headerTitleAlign: 'center',
+						headerShadowVisible: false,
+					}}
+				/>
+				<Stack.Screen
 					name="Profile"
 					component={ProfileScreen}
 					options={{
 						title: 'My profile',
+						headerTintColor: '#fff',
+						headerTitleStyle: {
+							fontSize: 30,
+							fontWeight: 'bold',
+						},
+						headerStyle: {
+							backgroundColor: 'black',
+						},
+						headerTitleAlign: 'center',
+						headerShadowVisible: false,
+					}}
+				/>
+				<Stack.Screen
+					name="Edit"
+					component={EditWordScreen}
+					options={{
+						title: 'Edit words',
 						headerTintColor: '#fff',
 						headerTitleStyle: {
 							fontSize: 27,

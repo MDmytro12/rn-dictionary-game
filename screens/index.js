@@ -6,3 +6,5 @@ export { default as Lvl_1_TemplateScreen } from './Lvl_1_TemplateScreen';
 export { default as AboutAppScreen } from './AboutApplicationScreen';
 export { default as VocabularySreen } from './VocabularySreen';
 export { default as AddWordScreen } from './AddWordScreen';
+export { default as EditWordScreen } from './EditWordScreen';
+export { default as ContactUsScreen } from './ContactUsScreen';

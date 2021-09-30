@@ -2,32 +2,63 @@ import React from 'react';
 import styled from 'styled-components';
 import { Foundation } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
+import db from '../db/database';
 
-const WordItem = ({ item }) => {
+const WordItem = ({ item, onStateChange, navigation }) => {
 	return (
 		<WordItemContainer>
-			<DeleteButton>
-				<Foundation name="page-delete" size={40} color="rgba(0,0,0,1)" />
+			<DeleteButton
+				onPress={() => {
+					db.find({ path: 'voc' }, (e, d) => {
+						if (d.length !== 0) {
+							let DATA = d[0].data.filter(
+								(i) => i.ew !== item.ew && i.tw !== item.tw,
+							);
+
+							db.update(
+								{ path: 'voc' },
+								{
+									$set: {
+										data: DATA,
+									},
+								},
+							);
+
+							onStateChange(DATA);
+						}
+					});
+				}}
+			>
+				<Foundation name="page-delete" size={40} color="black" />
 			</DeleteButton>
-			<EditButton>
+			<EditButton
+				onPress={() => {
+					navigation.navigate('Edit', {
+						ew: item.ew,
+						tw: item.tw,
+					});
+				}}
+			>
 				<Feather name="edit" size={35} color="black" />
 			</EditButton>
-			<EnglishWord>{item.word}</EnglishWord>
-			<TranslateWord>{item.translate}</TranslateWord>
+			<EnglishWord>{item.ew}</EnglishWord>
+			<TranslateWord>{item.tw}</TranslateWord>
 		</WordItemContainer>
 	);
 };
 
 const EditButton = styled.TouchableOpacity`
 	position: absolute;
-	top: 35%;
+	top: 48%;
 	left: 4%;
+	z-index: 3;
 `;
 
 const DeleteButton = styled.TouchableOpacity`
 	position: absolute;
-	top: 35%;
+	top: 45%;
 	right: 4%;
+	z-index: 3;
 `;
 
 const TranslateWord = styled.Text`
@@ -36,19 +67,21 @@ const TranslateWord = styled.Text`
 	color: black;
 	font-style: italic;
 	letter-spacing: 3px;
-	width: 100%;
+	max-width: 300px;
 	text-align: center;
 
 	padding-left: 20px;
 	padding-right: 20px;
-	max-width: 400px;
+	max-width: 100%;
+	padding-left: 80px;
+	padding-right: 80px;
 `;
 
 const EnglishWord = styled.Text`
 	font-size: 24px;
 	font-weight: 700;
 	color: #d18ef5;
-	max-width: 400px;
+	max-width: 300px;
 	text-align: center;
 	padding-left: 20px;
 	padding-right: 20px;
@@ -59,12 +92,13 @@ const WordItemContainer = styled.View`
 	background-color: white;
 	width: 100%;
 	border-radius: 100px;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding-top: 20px;
+	padding-bottom: 20px;
 	margin-bottom: 10px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	align-items: center;
 	position: relative;
 `;
 

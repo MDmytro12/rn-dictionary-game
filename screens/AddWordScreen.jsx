@@ -1,8 +1,15 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
+import { Alert } from 'react-native';
 import styled from 'styled-components';
 import { MenuButton } from '../components';
+import db from '../db/database';
 
 const AddWordScreen = ({ navigation }) => {
+	const [wordData, setWordData] = useState({
+		englishWord: '',
+		translateWord: '',
+	});
+
 	useLayoutEffect(() => {
 		navigation.setOptions({
 			headerLeft: () => (
@@ -11,13 +18,73 @@ const AddWordScreen = ({ navigation }) => {
 		});
 	}, [navigation]);
 
+	const onWordChange = (text, type) => {
+		setWordData({ ...wordData, [type]: text });
+	};
+
+	const onAddWordHandler = () => {
+		db.find({ path: 'voc' }, (e, d) => {
+			if (wordData.englishWord === '' || wordData.translateWord === '') {
+				Alert.alert(
+					'Empty field error!',
+					'Please dosoent left text field empty!',
+					[
+						{
+							text: 'Okey , I understand',
+						},
+					],
+				);
+				return;
+			}
+
+			if (d.length === 0) {
+				db.insert({
+					path: 'voc',
+					data: [
+						{
+							ew: wordData.englishWord,
+							tw: wordData.translateWord,
+						},
+					],
+				});
+			} else {
+				db.update(
+					{ path: 'voc' },
+					{
+						$set: {
+							data: [
+								...d[0].data,
+								{
+									ew: wordData.englishWord,
+									tw: wordData.translateWord,
+								},
+							],
+						},
+					},
+				);
+			}
+
+			setTimeout(() => {
+				navigation.navigate('Vocabulary', {
+					updateWord: 12,
+				});
+			}, 1000);
+		});
+	};
+
 	return (
 		<AboutContainer>
 			<WordTitle>Input word to translate : </WordTitle>
-			<WordInput />
+			<WordInput
+				value={wordData.englishWord}
+				onChangeText={(text) => onWordChange(text, 'englishWord')}
+			/>
 			<WordTitle>Input translation of this word : </WordTitle>
-			<WordInput />
-			<AddButton>
+			<WordInput
+				value={wordData.translateWord}
+				onChangeText={(text) => onWordChange(text, 'translateWord')}
+			/>
+			<AddButton onPress={onAddWordHandler}>
 				<AddButtonText>Add new word</AddButtonText>
 			</AddButton>
 		</AboutContainer>

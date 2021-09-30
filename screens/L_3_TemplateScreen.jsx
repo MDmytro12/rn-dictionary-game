@@ -28,6 +28,20 @@ const L_3_TemplateScreen = ({ navigation, route }) => {
 	});
 
 	useEffect(() => {
+		db.find({ path: 'lvl_3_page' }, (e, d) => {
+			console.log(d);
+			if (d.length !== 0) {
+				if (isNaN(d[0].currentPage)) {
+					db.update({ path: 'lvl_3_page' }, { $set: { currentPage: 1 } });
+					setCurrentPage(1);
+				} else {
+					setCurrentPage(d[0].currentPage);
+				}
+			} else {
+				db.update({ path: 'lvl_3_page' }, { $set: { currentPage: 1 } });
+				setCurrentPage(1);
+			}
+		});
 		db.find({ path: 'lvl_3' }, (e, d) => {
 			setTaskCount(d[0].task.length);
 
@@ -38,14 +52,6 @@ const L_3_TemplateScreen = ({ navigation, route }) => {
 			});
 		});
 
-		db.find({ path: 'lvl_3_page' }, (e, d) => {
-			if (isNaN(d[0].currentPage) || d[0].length === 0) {
-				db.update({ path: 'lvl_3_page' }, { $set: { currentPage: 1 } });
-				setCurrentPage(1);
-			} else {
-				setCurrentPage(d[0].currentPage);
-			}
-		});
 		setAllDoneFalse();
 	}, []);
 
